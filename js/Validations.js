@@ -58,8 +58,16 @@ class Validations {
         return true;
     }
 
-    isValidMonth() {
-        return true
+    isValidMonth(month, lang) {
+        const monthName = {
+            lt: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            en: ['Sausis', 'Vasaris', 'Kovas', 'Balandis', 'Geguze', 'Birzelis', 'Liepa', 'Rugpjutis', 'Rugsėjis', 'Spalis', 'Lapkritis', 'Gruodis'],
+        }
+        if (!monthName[lang].includes(month)) {
+            console.error('ERROR: Month has to be with proper name');
+            return false;
+        }
+        return true;
     }
 
     isValidWeekDay() {
