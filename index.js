@@ -1,4 +1,4 @@
-const Validations = require('./js/Validations');
+const Validations = require('./js/validation/Validations');
 
 const v = new Validations();
 

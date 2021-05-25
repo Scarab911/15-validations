@@ -1,28 +1,28 @@
-class Validations {
+class Validation {
 
     isValidFirstName(firstName) {
 
-        if(!this.isValidMessage(firstName)) {
+        if (!this.isValidMessage(firstName)) {
             return false;
         }
-        if(firstName.length < 2) {
+        if (firstName.length < 2) {
             return false;
         }
-        if(firstName[0].toLowerCase() === firstName[0]){
-        return false;
-        }
-        if(firstName.slice(1).toLowerCase() !== firstName.slice(1)) { 
+        if (firstName[0].toLowerCase() === firstName[0]) {
             return false;
         }
-       
+        if (firstName.slice(1).toLowerCase() !== firstName.slice(1)) {
+            return false;
+        }
+
         return true;
     }
 
     isValidLastName(lastName) {
-        if(!this.isValidMessage(lastName)) {
+        if (!this.isValidMessage(lastName)) {
             return false;
         }
-        if(lastName.length < 2) {
+        if (lastName.length < 2) {
             return false;
         }
         return true;
@@ -33,9 +33,12 @@ class Validations {
     }
 
     isValidMessage(message) {
-        if(typeof message !== 'string' || message === '') {
+        if (message === undefined) {
+            return
+        }
+        if (typeof message !== 'string' || message === '') {
             console.error('ERROR: input has to be a text string');
-            return  false;
+            return false;
         }
         return true;
     }
@@ -44,12 +47,12 @@ class Validations {
 
         //ar telefono numeris skaicius?
 
-        if(typeof phoneNumber !== 'number' || phoneNumber === '') {
+        if (typeof phoneNumber !== 'number' || phoneNumber === '') {
             console.error('ERROR: Phone Number has to be a number, you cannot leave empty space');
             return false;
         }
 
-        if (phoneNumber.length <= 2)  {
+        if (phoneNumber.length <= 2) {
             console.error('ERROR: per trumpas ivestas numeris!');
             return false;
         }
@@ -77,6 +80,20 @@ class Validations {
     isValidPersonId() {
         return true
     }
+    isUpperCase(letter) {
+        return letter === letter.toUpperCase;
+    }
+    countSymbols() {
+        let count = 0;
+
+        for (const t of Text) {
+            if (t === letter) {
+                count++;
+            }
+        }
+
+        return count;
+    }
 }
 
-module.exports = Validations;
+module.exports = Validation;
