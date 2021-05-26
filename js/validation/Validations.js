@@ -1,92 +1,74 @@
 class Validation {
-
     isValidFirstName(firstName) {
-
-        if (!this.isValidMessage(firstName)) {
+        if (firstName === undefined ||
+            typeof firstName !== 'string' ||
+            firstName.length < 2 ||
+            !this.isUpperCase(firstName[0])) {
             return false;
         }
-        if (firstName.length < 2) {
-            return false;
-        }
-        if (firstName[0].toLowerCase() === firstName[0]) {
-            return false;
-        }
-        if (firstName.slice(1).toLowerCase() !== firstName.slice(1)) {
-            return false;
-        }
-
         return true;
     }
 
     isValidLastName(lastName) {
-        if (!this.isValidMessage(lastName)) {
-            return false;
-        }
-        if (lastName.length < 2) {
+        if (lastName === undefined ||
+            typeof lastName !== 'string' ||
+            lastName.length < 2 ||
+            !this.isUpperCase(lastName[0])) {
             return false;
         }
         return true;
     }
 
     isValidEmail(email) {
-        return true;
-    }
-
-    isValidMessage(message) {
-        if (message === undefined) {
-            return
-        }
-        if (typeof message !== 'string' || message === '') {
-            console.error('ERROR: input has to be a text string');
+        if (typeof email !== 'string' ||
+            email.length < 6 ||
+            email.indexOf('@') === -1 || //reiskia @ stringe nerasta(-1)
+            email[0] === '@' ||         // pirma string reiksme yra@
+            email.slice(-4).indexOf('@') > -1 || //paima 4 pskutinius email simbolius ir iesko @
+            this.countSimbols(email, '@') > 1) { //tikrina kiek stringe yra atitinkamu simboliu!
             return false;
         }
         return true;
     }
 
-    isValidPhoneNumber(phoneNumber) {
-
-        //ar telefono numeris skaicius?
-
-        if (typeof phoneNumber !== 'number' || phoneNumber === '') {
-            console.error('ERROR: Phone Number has to be a number, you cannot leave empty space');
-            return false;
-        }
-
-        if (phoneNumber.length <= 2) {
-            console.error('ERROR: per trumpas ivestas numeris!');
-            return false;
-        }
-
-        console.log('teisingai ivestas numeris');
-        return true;
-    }
-
-    isValidMonth(month, lang) {
-        const monthName = {
-            lt: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            en: ['Sausis', 'Vasaris', 'Kovas', 'Balandis', 'Geguze', 'Birzelis', 'Liepa', 'Rugpjutis', 'Rugsėjis', 'Spalis', 'Lapkritis', 'Gruodis'],
-        }
-        if (!monthName[lang].includes(month)) {
-            console.error('ERROR: Month has to be with proper name');
+    isValidMessage(msg) {
+        if (typeof msg !== 'string' ||
+            msg === '') {
             return false;
         }
         return true;
     }
 
-    isValidWeekDay() {
-        return true
+    isValidPhoneNumber() {
+        return true;
     }
 
-    isValidPersonId() {
-        return true
+    isValidMonthName() {
+        return true;
     }
+
+    isValidWeekdayName() {
+        return true;
+    }
+
+    isValidPersonID() {
+        return true;
+    }
+
     isUpperCase(letter) {
-        return letter === letter.toUpperCase;
+        // if (letter === letter.toUpperCase()) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+
+        return letter === letter.toUpperCase();
     }
-    countSymbols() {
+
+    countSimbols(text, letter) {
         let count = 0;
 
-        for (const t of Text) {
+        for (const t of text) {
             if (t === letter) {
                 count++;
             }
